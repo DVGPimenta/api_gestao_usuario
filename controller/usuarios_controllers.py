@@ -38,7 +38,7 @@ def rota_get_usuario_por_cpf(cpf):
         session.close()
 
 
-# Rota de cadastro de clientes
+# Rota de cadastro de usuarios
 @usuarios_page.route('/usuarios/add', methods=['POST'])
 def rota_post_usuarios():
     data = request.get_json()
@@ -61,6 +61,7 @@ def rota_post_usuarios():
         session.close()
 
 
+# Rota Edição De Usuarios
 @usuarios_page.route('/usuarios/edit/<cpf>', methods=['PUT'])
 def rota_put_usuarios(cpf):
     data = request.get_json()
@@ -85,6 +86,7 @@ def rota_put_usuarios(cpf):
         session.close()
 
 
+# Rota para deletar usuarios
 @usuarios_page.route('/usuarios/delete/<cpf>', methods=['DELETE'])
 def rota_deletar_usuario(cpf):
     session = Session_local()

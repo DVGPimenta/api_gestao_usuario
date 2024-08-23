@@ -5,19 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="2446d42d-87a8-4cd3-8893-d9a39094bca1" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/api_gestao_usuario.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/conexao.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/controller/usuarios_controllers.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/models/usuarios_models.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requeriments.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/services/usuarios_services.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../projeto-1/.env" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../projeto-1/.gitignore" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../projeto-1/dist/teste.txt" beforeDir="false" />
@@ -61,7 +49,7 @@
     "Python.usuarios_models.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "main",
     "settings.editor.selected.configurable": "inlay.hints"
   }
 }]]></component>
