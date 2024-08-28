@@ -1,3 +1,4 @@
+from sqlalchemy.exc import IntegrityError
 from flask import Blueprint, jsonify, request
 from services.usuarios_services import UsuariosService
 from sqlalchemy.orm import sessionmaker
@@ -17,9 +18,9 @@ def rota_get_usuarios():
     try:
         usuarios_service = UsuariosService(session)
         usuarios = usuarios_service.get_usuarios()
-        return jsonify(usuarios)
+        return jsonify(usuarios), 200
     except ValueError as e:
-        return jsonify(f'Erro {e}')
+        return jsonify({'erro': str(e)}), 400
     finally:
         session.close()
 
@@ -31,9 +32,12 @@ def rota_get_usuario_por_cpf(cpf):
     try:
         usuario_service = UsuariosService(session)
         usuario = usuario_service.get_usuario_por_cpf(cpf)
-        return jsonify(usuario)
+        if usuario:
+            return jsonify(usuario), 200
+        else:
+            return jsonify({'erro': 'Usuario não encontrado em nosso bando de dados'}), 404
     except Exception as e:
-        return jsonify(f'Erro {e}')
+        return jsonify({'erro': str(e)}), 500
     finally:
         session.close()
 
@@ -48,15 +52,17 @@ def rota_post_usuarios():
     endereco = data.get('endereco')
 
     if not cpf or not nome or not telefone or not endereco:
-        return jsonify(f'Dados insuficientes para o cadastro')
+        return jsonify({'erro': 'Dados insuficientes para o cadastro'}), 400
 
     session = Session_local()
     try:
         service_usuarios = UsuariosService(session)
         usuario = service_usuarios.post_usuarios(cpf, nome, telefone, endereco)
-        return jsonify(usuario)
-    except ValueError as e:
-        return f'Erro {e} ao cadastrar usuario'
+        return jsonify({'mensagem': f'Usuario {usuario.nome} cadastrado com susseco'})
+    except ValueError as ve:
+        return jsonify({'erro': str(ve)}), 400
+    except IntegrityError:
+        return jsonify({'erro': 'CPF ja existente no banco de dados'}), 409
     finally:
         session.close()
 
@@ -70,7 +76,7 @@ def rota_put_usuarios(cpf):
     endereco = data.get('endereco')
 
     if not any([nome, telefone, endereco]):
-        return jsonify({'erro': 'Nenhum dado a ser atualizado'})
+        return jsonify({'erro': 'Nenhum dado a ser atualizado'}), 400
 
     session = Session_local()
     try:
@@ -81,7 +87,10 @@ def rota_put_usuarios(cpf):
             telefone=telefone,
             endereco=endereco
         )
-        return jsonify(usuario)
+        if usuario:
+            return jsonify(usuario), 200
+        else:
+            return jsonify({'erro': 'Usuario não encontrado'}), 404
     finally:
         session.close()
 
@@ -93,6 +102,13 @@ def rota_deletar_usuario(cpf):
     try:
         usuario_service = UsuariosService(session)
         usuario = usuario_service.delete_usuario(cpf)
-        return jsonify(usuario)
+        if usuario:
+            return jsonify(usuario), 200
+        else:
+            return jsonify({'erro': 'Usuario não encontrado em nosso bando de dados'}), 404
     except Exception as e:
-        return f'Erro {e} ao deletar usuario'
+        return jsonify({'erro': str(e)}), 500
+    finally:
+        session.close()
+
+
